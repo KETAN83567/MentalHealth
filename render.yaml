@@ -1,12 +1,10 @@
 services:
   - type: web
-    name: enhanced-emotional-api
+    name: emotional-wellbeing-api
     runtime: python
     buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
     envVars:
-      - key: PYTHON_VERSION
-        value: 3.10
+      - key: PORT
+        value: 8000
     plan: free
-    region: oregon
-

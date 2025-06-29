@@ -5,8 +5,6 @@ from pydantic import BaseModel, Field
 import numpy as np
 from typing import List, Optional, Dict
 import random
-import nest_asyncio
-from pyngrok import ngrok
 import uvicorn
 from datetime import datetime, time
 import math
@@ -63,7 +61,7 @@ except FileNotFoundError:
 class SmartRecommendationEngine:
     """Enhanced recommendation engine with contextual intelligence"""
 
-    def __init__(self):
+    def _init_(self):
         self.recommendation_templates = {
             'sleep': {
                 'insufficient': [
@@ -465,21 +463,5 @@ def health_check():
 # Run the Enhanced Server
 print("🚀 Starting Enhanced Emotional Wellbeing API...")
 
-# IMPORTANT: Reset your ngrok token on your dashboard as it was shared publicly
-NGROK_AUTH_TOKEN = "2yzuP5u1KEfMovnvwlkKXEd4NR0_N1Z6t5wj9L8hAm6XNCmR"
-ngrok.set_auth_token(NGROK_AUTH_TOKEN)
-nest_asyncio.apply()
-
-try:
-    public_url = ngrok.connect(8000).public_url
-    print(f"✅ ENHANCED API IS LIVE!")
-    print(f"🌐 Public URL: {public_url}")
-    print(f"📚 API Documentation: {public_url}/docs")
-    print(f"🔍 Health Check: {public_url}/health")
-    print(f"🎯 Enhanced Prediction: {public_url}/predict_enhanced")
-
-    uvicorn.run(app, host='0.0.0.0', port=8000)
-
-except Exception as e:
-    print(f"❌ Failed to start server: {e}")
-    print("Make sure port 8000 is available and ngrok token is valid")
+if _name_ == "_main_":
+    uvicorn.run(app, host='0.0.0.0', port=8000)
